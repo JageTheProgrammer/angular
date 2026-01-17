@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "taiiaja": {
+    "taitaja": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -61,10 +61,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "taiiaja:build:production"
+              "buildTarget": "taitaja:build:production"
             },
             "development": {
-              "buildTarget": "taiiaja:build:development"
+              "buildTarget": "taitaja:build:development"
             }
           },
           "defaultConfiguration": "development"

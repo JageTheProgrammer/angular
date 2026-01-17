@@ -1,0 +1,11 @@
+:root {
+  --neon-green: #3cff7a;
+  --deep-green: #021a0c;
+  --darkest: #010b06;
+}
+
+body {
+  margin: 0;
+  background: var(--darkest);
+}
+

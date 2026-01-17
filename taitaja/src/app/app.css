@@ -1,0 +1,90 @@
+:root {
+  --neon-green: #3cff7a;
+  --bg-dark: #020403;
+  --bg-deep: #010805;
+}
+
+body {
+  margin: 0;
+  background: var(--bg-deep);
+  font-family: Inter, system-ui, sans-serif;
+  overflow: hidden;
+}
+
+/* === SCENE === */
+.neon-bg {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* === CLOVERS === */
+.clover {
+  position: absolute;
+  top: -10vh;
+  left: var(--left, 50%);
+  width: var(--size, 32px);
+  height: var(--size, 32px);
+  z-index: 1;
+
+  background: radial-gradient(circle at 30% 30%, #6dff9c, #1cff6a 40%, transparent 70%);
+  clip-path: path(
+    "M22 3
+     C27 -2 40 6 32 18
+     C44 22 36 44 22 34
+     C8 44 0 22 12 18
+     C4 6 17 -2 22 3 Z"
+  );
+
+  filter: drop-shadow(0 0 10px rgba(60,255,122,0.9))
+          drop-shadow(0 0 25px rgba(60,255,122,0.5));
+
+  animation: driftSpin var(--duration, 18s) linear infinite;
+}
+
+/* Animate clovers falling + spinning */
+@keyframes driftSpin {
+  0%   { transform: translateY(-20vh) rotate(0deg); opacity: 0; }
+  10%  { opacity: 1; }
+  100% { transform: translateY(120vh) rotate(360deg); opacity: 0; }
+}
+
+/* === CONTENT === */
+.class-home {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 900px;
+  padding: 2rem;
+}
+
+h1 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
+    font-style: italic;
+    margin-top: -0px;
+    text-transform: uppercase;
+    justify-content: center;
+    align-items: center;
+    padding: clamp(1rem, 2vw, 3rem);
+    position: static;
+    text-shadow: 0 4px 8px rgb(92, 92, 92);
+    display: flex;
+    font-size: 3.7rem;
+}
+
+.class-home h1 {
+    color: rgb(0, 255, 34);
+    text-decoration: line-through;
+    text-decoration-style: solid;
+    text-decoration-color: rgba(0, 0, 0, 0.308);
+    text-shadow: 0 4px 8px #09ff00; 
+}
+
+p { 
+    color: #fff;
+}
