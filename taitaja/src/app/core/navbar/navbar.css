@@ -7,17 +7,18 @@
 
     --glass-blur: blur(14px);
     --glass-border: rgba(255, 255, 255, 0.12);
-    --glass-highlight: rgba(255, 255, 255, 0.08);
 }
 
-
+/* ---------- Navbar Container ---------- */
 .navbar-container {
     position: fixed;
-    inset: 0 0 auto 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 72px;
     z-index: 9999;
 
     background: transparent;
-    overflow: hidden;
 }
 
 /* Glass layer */
@@ -29,64 +30,60 @@
     background: linear-gradient(
         to bottom,
         var(--navbar-bg),
-        rgba(0, 0, 0, 0.05)
+        rgba(0, 0, 0, 0.1)
     );
 
     backdrop-filter: var(--glass-blur);
     -webkit-backdrop-filter: var(--glass-blur);
 
     border-bottom: 1px solid var(--glass-border);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
 
     z-index: -1;
 }
+
+/* Scrolled state */
 .navbar-container.scrolled::before {
     background: linear-gradient(
         to bottom,
         var(--navbar-scrolled-bg),
-        rgba(0, 0, 0, 0.2)
+        rgba(0, 0, 0, 0.25)
     );
 
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
 }
 
-/* ---------- Inner Navbar Section ---------- */
+/* ---------- Inner Navbar ---------- */
 .navbar-section {
     position: relative;
     z-index: 1;
 
-    width: 100%;
     max-width: 1200px;
+    height: 100%;
     margin: 0 auto;
+    padding: 0 1.5rem;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0.75rem 1.5rem;
 }
-
 
 /* ---------- Logo ---------- */
 .logo a {
-    margin-right: 0;
-    color: rgb(255, 255, 255);
-    -webkit-text-stroke: 1px #ffffff;
-    line-height: 1.7;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 2.3rem;
+    color: #fff;
     text-decoration: none;
-    text-align: center;
-    transition: color ease-in-out .3s;
-
+    -webkit-text-stroke: 1px #fff;
+    transition: color 0.3s ease;
 }
-
 
 .logo a:hover {
     color: var(--link-hover);
 }
 
-/* ---------- Menu Items ---------- */
+/* ---------- Desktop Menu ---------- */
 .menu-items {
     display: flex;
     gap: 1.5rem;
@@ -98,15 +95,15 @@
 }
 
 .menu-items li a {
-    display: inline-block;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-style: italic;
     font-size: clamp(1rem, 1.3vw, 2rem);
-    padding: 0.7rem 1.2rem;
-    color: #fff; /* Whiter menu items */
+    padding: 0.6rem 1.1rem;
+    color: #fff;
     text-decoration: none;
     border-radius: 12px;
-    transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+
+    transition: transform 0.25s ease, color 0.25s ease;
 }
 
 .menu-items li a:hover {
@@ -115,27 +112,16 @@
     text-shadow: 0 0 8px var(--link-hover);
 }
 
-/* ---------- Hamburger Button ---------- */
+/* ---------- Hamburger ---------- */
 .menu-toggle {
     display: none;
-    font-size: 2.5rem;
+    font-size: 2.4rem;
     color: #fff;
     cursor: pointer;
     user-select: none;
-
-    position: fixed;
-    top: 1rem;
-    right: 1.5rem;
-    z-index: 10001;
 }
 
-/* ---------- Scrolled Navbar ---------- */
-.navbar-container.scrolled {
-    background: var(--navbar-scrolled-bg);
-    backdrop-filter: var(--blur-backdrop);
-}
-
-/* ---------- Responsive Tablet (1024px) ---------- */
+/* ---------- Tablet ---------- */
 @media (max-width: 1024px) {
     .logo a {
         font-size: 2rem;
@@ -143,39 +129,45 @@
 
     .menu-items li a {
         font-size: 1.2rem;
-        padding: 0.6rem 1rem;
     }
 }
 
-/* ---------- Mobile (768px) ---------- */
+/* ---------- Mobile ---------- */
 @media (max-width: 768px) {
 
-
-    .logo a {
-        font-size: 2.3rem;
+    /* Show hamburger */
+    .menu-toggle {
+        display: block;
+        z-index: 10001;
     }
-    /* Full-screen overlay menu */
+
+    /* Fullscreen menu overlay */
     .menu-items {
         position: fixed;
-        top: 0;
-        left: -30px;
-        width: 100%;
-        height: 100vh;
+        inset: 0;
+        z-index: 10000;
+
         flex-direction: column;
         justify-content: center;
         align-items: center;
         gap: 2.5rem;
 
-        background: rgba(0, 0, 0, 0.199);
-        backdrop-filter: blur(20px);
+        background: linear-gradient(
+            rgba(10, 10, 10, 0.45),
+            rgba(10, 10, 10, 0.7)
+        );
+
+        backdrop-filter: blur(22px);
+        -webkit-backdrop-filter: blur(22px);
 
         opacity: 0;
         pointer-events: none;
         transform: scale(1.05);
 
-        transition: opacity 0.4s ease, transform 0.4s ease;
+        transition: opacity 0.35s ease, transform 0.35s ease;
     }
 
+    /* Open state */
     .menu-items.open {
         opacity: 1;
         pointer-events: auto;
@@ -184,30 +176,6 @@
 
     .menu-items li a {
         font-size: 2rem;
-        text-align: left;
-        color: #ffffff; /* Whiter links */
-    }
-
-    /* Hamburger stays visible */
-    .menu-toggle {
-        display: block;
-    }
-}
-
-/* ---------- Optional Hover Effect ---------- */
-.menu-items li a:hover {
-    text-shadow: 0 0 10px var(--link-hover);
-}
-
-
-@media (max-width: 768px) {
-    .menu-items {
-        background: linear-gradient(
-            rgba(10, 10, 10, 0.35),
-            rgba(10, 10, 10, 0.55)
-        );
-
-        backdrop-filter: blur(22px);
-        -webkit-backdrop-filter: blur(22px);
+        text-align: center;
     }
 }
