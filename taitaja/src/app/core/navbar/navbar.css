@@ -1,35 +1,71 @@
 /* ---------- Variables ---------- */
 :root {
-    --navbar-bg: rgba(5, 54, 12, 0.23);
-    --navbar-scrolled-bg: rgba(32, 32, 32, 0.1);
-    --link-color: #fff;          /* normal link color */
-    --link-hover: #baffff;       /* hover neon-ish white */
-    --blur-backdrop: blur(10px);
+    --navbar-bg: rgba(5, 54, 12, 0.35);
+    --navbar-scrolled-bg: rgba(20, 20, 20, 0.45);
+    --link-color: #fff;
+    --link-hover: #baffff;
+
+    --glass-blur: blur(14px);
+    --glass-border: rgba(255, 255, 255, 0.12);
+    --glass-highlight: rgba(255, 255, 255, 0.08);
 }
 
-/* ---------- Navbar Container ---------- */
+
 .navbar-container {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
+    inset: 0 0 auto 0;
     z-index: 9999;
 
-    background: var(--navbar-bg);
-    transition: background-color 0.4s ease, backdrop-filter 0.4s ease;
-    padding: 0.5rem 0;
+    background: transparent;
+    overflow: hidden;
+}
+
+/* Glass layer */
+.navbar-container::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background: linear-gradient(
+        to bottom,
+        var(--navbar-bg),
+        rgba(0, 0, 0, 0.05)
+    );
+
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+
+    border-bottom: 1px solid var(--glass-border);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+
+    z-index: -1;
+}
+.navbar-container.scrolled::before {
+    background: linear-gradient(
+        to bottom,
+        var(--navbar-scrolled-bg),
+        rgba(0, 0, 0, 0.2)
+    );
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
 }
 
 /* ---------- Inner Navbar Section ---------- */
 .navbar-section {
+    position: relative;
+    z-index: 1;
+
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 1.5rem;
+    padding: 0.75rem 1.5rem;
 }
+
 
 /* ---------- Logo ---------- */
 .logo a {
@@ -116,7 +152,7 @@
 
 
     .logo a {
-        font-size: 2.5rem;
+        font-size: 2.3rem;
     }
     /* Full-screen overlay menu */
     .menu-items {
@@ -161,4 +197,17 @@
 /* ---------- Optional Hover Effect ---------- */
 .menu-items li a:hover {
     text-shadow: 0 0 10px var(--link-hover);
+}
+
+
+@media (max-width: 768px) {
+    .menu-items {
+        background: linear-gradient(
+            rgba(10, 10, 10, 0.35),
+            rgba(10, 10, 10, 0.55)
+        );
+
+        backdrop-filter: blur(22px);
+        -webkit-backdrop-filter: blur(22px);
+    }
 }

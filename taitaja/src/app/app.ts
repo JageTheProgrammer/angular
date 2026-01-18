@@ -1,12 +1,16 @@
 import { Component, signal } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 import { Navigationbar } from './core/navbar/navbar';
-import { Home } from './ciomponents/home/home';
-
+import { FooterComponent } from './core/footer/footer';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [Navigationbar, Home],
+  imports: [
+    RouterOutlet,
+    Navigationbar,
+    FooterComponent
+  ],
   templateUrl: './app.html',
   styleUrls: ['./app.css']
 })
